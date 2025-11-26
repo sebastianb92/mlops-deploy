@@ -38,7 +38,6 @@
         }
     ],
     "cpu": "1024",
-    "enableFaultInjection": false,
     "executionRoleArn": "arn:aws:iam::804923754854:role/ecsTaskExecutionRole",
     "family": "mlops-deploy-task",
     "memory": "3072",
