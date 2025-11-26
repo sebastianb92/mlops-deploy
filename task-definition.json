@@ -1,32 +1,87 @@
 {
-    "family": "mlops-deply-task",
-    "networkMode": "awsvpc",
-    "requiresCompatibilities": ["EC2"],
-    "cpu": "1024",
-    "memory": "3072",
-    "executionRoleArn": "arn:aws:iam::804923754854:role/ecsTaskExecutionRole",
+    "compatibilities": [
+        "EC2",
+        "FARGATE",
+        "MANAGED_INSTANCES"
+    ],
     "containerDefinitions": [
         {
-            "name": "mlops-deploy-app",
-            "image": "804923754854.dkr.ecr.us-east-2.amazonaws.com/mlops-deploy-app",
+            "cpu": 0,
+            "environment": [],
+            "environmentFiles": [],
             "essential": true,
-            "portMappings": [
-                {
-                    "containerPort": 80,
-                    "hostPort": 80,
-                    "protocol": "tcp",
-                    "appProtocol": "http"
-                }
-            ],
+            "image": "804923754854.dkr.ecr.us-east-2.amazonaws.com/mlops-deploy-app",
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
-                    "awslogs-group": "/ecs/mlops-deply-task",
+                    "awslogs-group": "/ecs/mlops-deploy-task",
+                    "awslogs-create-group": "true",
                     "awslogs-region": "us-east-2",
-                    "awslogs-stream-prefix": "ecs",
-                    "awslogs-create-group": "true"
+                    "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            },
+            "mountPoints": [],
+            "name": "mlops-deploy-app",
+            "portMappings": [
+                {
+                    "appProtocol": "http",
+                    "containerPort": 80,
+                    "hostPort": 80,
+                    "name": "80",
+                    "protocol": "tcp"
                 }
-            }
+            ],
+            "systemControls": [],
+            "ulimits": [],
+            "volumesFrom": []
         }
-    ]
+    ],
+    "cpu": "1024",
+    "enableFaultInjection": false,
+    "executionRoleArn": "arn:aws:iam::804923754854:role/ecsTaskExecutionRole",
+    "family": "mlops-deploy-task",
+    "memory": "3072",
+    "networkMode": "awsvpc",
+    "placementConstraints": [],
+    "registeredAt": "2025-11-26T02:53:43.992Z",
+    "registeredBy": "arn:aws:iam::804923754854:root",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+        }
+    ],
+    "requiresCompatibilities": [
+        "EC2"
+    ],
+    "revision": 1,
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "status": "ACTIVE",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-2:804923754854:task-definition/mlops-deploy-task:1",
+    "volumes": [],
+    "tags": []
 }
